@@ -1,9 +1,9 @@
-## Threading and Concurrency
-### General
+# Threading and Concurrency
+## General
 * since **C++11** we got support for **threads** and **concurrency** built in language
   
-### Threading
-#### General
+## Threading
+### General
 * threading model in C++ is **1:1** threading model, which means: 
   * each C++ thread (`std:thread`) corresponds to single OS thread
   * those threads are managed directly by OS scheduler
@@ -29,10 +29,11 @@
   * static function `std::this_thread::get_id()` from *inside* the thread
 #### Mutual exclusions
 * for mutual exclusion there is `std::mutex `class, with member functions `.lock()` and `.unlock()` 
-  * prefer wrapper templates class that provides RAII for `.lock()` and `.unlock()`; since C++17 there is `std::scoped_lock<>`, for elder versions of C++ use std::lock_quard<>`
+  * prefer wrapper templates class that provides RAII for `.lock()` and `.unlock()`; since C++17 there is `std::scoped_lock<>` (for older versions of C++ use `std::lock_quard<>`)
 * `std::mutex` can be locked only once at a time (as opposed to `std::recursive_mutex`)
-* `std::scoped_lock<>` can lock multiple mutexes at once just fine, for elder version of C++:
-    * use `std::lock()` template function
+* `std::scoped_lock<>` can lock multiple mutexes at once just fine, 
+  * for older version of C++:
+    * use `std::lock(mutex1, mutex2...)` template function
     * to provide **RAII** for mutexes that are already locked, use `std::lock_quard<>` with `std::adopt_lock` as second argument
 * for more flexibility use `std::unique_lock<>`:
   * supports **lazy lock** with `std::defer_lock`, as well as `std::adopt_lock` for already locked mutexes
