@@ -3,4 +3,10 @@ stuff that I want to keep in my head, la la la
 
 
 # Index
-- [Threading and Concurrency](https://github.com/wiertek/CppNotes/blob/master/Concurrency.md)
+- Basic Types
+  - references
+- Expressions
+  - value categories
+  - fold expression
+
+- [Threading and Concurrency](https://github.com/wiertek/CppNotes/blob/master/doc/Concurrency.md)
