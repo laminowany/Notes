@@ -25,6 +25,15 @@
     - **lvalue** -> lvalue reference
   - this behavior is crucial part of **move semantic** and enables **move constructors**, **move assignments** and another *move-aware* functions to be called due to those **overload resolution** rules
 
+
+## Lvalue references
+- can be used to **alias** an existing object (optionally with different cv-qualification)
+- allow *passing by reference* to function
+- if function return type is **lvalue reference**, the function call expression becomes an **lvalue expression** (being assignable: `fun() = 5`)
+
+## Rvalue references
+- can be bound to **rvalues** (*xvalues* and *prvalues*) 
+
 ## Reference collapsing
 - due to type manipulations in **templates** or **typedefs**, references to references may be formed and in such case the **collapse**
 -  rvalue reference to rvalue reference collapses to rvalue reference, all other combinations form lvalue reference:
@@ -34,13 +43,6 @@
    -  `T& &` -> `T&`
 -  this behaviour is crucial for **perfect forwarding**
 
-## Lvalue references
-- can be used to **alias** an existing object (optionally with different cv-qualification)
-- allow *passing by reference* to function
-- if function return type is **lvalue reference**, the function call expression becomes an **lvalue expression** (being assignable: `fun() = 5`)
-
-## Rvalue references
-- can be bound to **rvalues** (*xvalues* and *prvalues*) 
 
 ## Forwarding references
 - special kind of references that **preserve the value category** of a function argument, making it possible to *forward* further along with **value category** using `std::forward`
