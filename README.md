@@ -6,7 +6,7 @@ stuff that I want to keep in my head, la la la
 - Basic Types
   - [References](https://github.com/wiertek/CppNotes/blob/master/doc/References.md)
 - Expressions
-  - value categories
+  - [Value Categories](https://github.com/wiertek/CppNotes/blob/master/doc/ValueCategories.md)
   - fold expression
 
 - [Threading and Concurrency](https://github.com/wiertek/CppNotes/blob/master/doc/Concurrency.md)
