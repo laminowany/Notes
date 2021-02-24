@@ -1,5 +1,5 @@
 # Threading and Concurrency
-[back to index](https://github.com/wiertek/CppNotes)
+[back to index](../README.md)
 ## General
 * since **C++11** we got support for **threads** and **concurrency** built in language
   

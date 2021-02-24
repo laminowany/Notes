@@ -1,5 +1,5 @@
 # Value Categories
-[back to index](https://github.com/wiertek/CppNotes)
+[back to index](../README.md)
 
 ## General
 - each **expression** is characterized by two independent properties: a **type** and a **value category**
