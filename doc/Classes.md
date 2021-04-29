@@ -6,6 +6,10 @@
   - **public** for structs
   - **private** for classes
 
+## Members
+### Static data members
+- **static** data members can be declared **inline** and initialized in the class definition since C++17
+
 ## Nested classes
 Class declared inside other class is **nested class**:
 - the name of the **nested class** exists only in the scope of the **enclosing class**
