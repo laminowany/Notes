@@ -35,7 +35,9 @@ auto f() { return 5; }
 If placeholder type (**auto**/**Concept auto**) appears in **function** or **function template** parameter list, then declaration declares a **function template**, and one **invented template parameter** for each placeholder is appended to the **template parameter list**.
 ```
 int f(auto a, auto b)
-===
+```
+is the same as:
+```
 template<typename T1, typename T2>
 int f(T1 a, T2 b)
 ```

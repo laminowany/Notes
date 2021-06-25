@@ -6,9 +6,23 @@
   - **public** for structs
   - **private** for classes
 
-## Members
-### Static data members
+## Static data members
 - **static** data members can be declared **inline** and initialized in the class definition since C++17
+
+## Non-static member functions
+### Ref-qualified member functions
+A non-static member function can be declared with:
+- no ref-qualifier - `void f() {...}`
+  - implicit object parameter has type **lvalue reference** to cv-qualified X and is additionally allowed to bind **rvalue** implied object argument
+- lvalue ref-qualifier - `void f() & {...}`
+  - the implicit object parameter has type **lvalue reference** to cv-qualified X
+- the rvalue ref-qualifier - `void f() && {...}`
+  - the implicit object parameter has type **rvalue reference** to cv-qualified X
+  
+**No ref-qualifed overload** cannot be mixed with **ref-qualified overloads**.
+
+Unlike **cv-qualification**, **ref-qualification** does not change the properties of the `this` pointer: within a **rvalue ref-qualified** function, `*this` remains an **lvalue expression**.
+
 
 ## Nested classes
 Class declared inside other class is **nested class**:

@@ -28,16 +28,44 @@
 * there is `std::thread::id` class to identify threads and represent **id**, use
   * `.get_id()` member function per given thread object
   * static function `std::this_thread::get_id()` from *inside* the thread
+
 #### Mutual exclusions
-* for mutual exclusion there is `std::mutex `class, with member functions `.lock()` and `.unlock()` 
-  * prefer wrapper templates class that provides RAII for `.lock()` and `.unlock()`; since **C++17** there is `std::scoped_lock<>` (for older versions of C++ use `std::lock_quard<>`)
-* `std::mutex` can be locked only once at a time (as opposed to `std::recursive_mutex`)
-* `std::scoped_lock<>` can lock multiple mutexes at once just fine, 
-  * for older version of C++:
-    * use `std::lock(mutex1, mutex2...)` template function
-    * to provide **RAII** for mutexes that are already locked, use `std::lock_quard<>` with `std::adopt_lock` as second argument
-* for more flexibility use `std::unique_lock<>`:
+* aquiring **mutex** is expensive operation, use it wisely for minimal amount of code
+* `std::mutex `class with member functions:
+  * `.lock()` - locks the mutex, blocks if the mutex is not available
+  * `.try_lock()` - tries to lock the mutex, returns if the mutex is not available
+  * `.unlock()`
+* `std::mutex` can be locked only once at a time from a given thread, locking it more than once from the same thread results in **UB**
+* `std::recursive_mutex` can be locked multiple times, but rethink your architecture if you need it
+* prefer RAII wrapper `std::scoped_lock<>` than raw `std::mutex`
+  * `std::scoped_lock<>` can lock multiple mutexes at once just fine, 
+  * before **C++17** there is  `std::lock_quard<>` and `std::lock(mutex1, mutex2...)` template function for locking multiple mutexes at once
+* for more flexibility but with extrea cost use `std::unique_lock<>`:
   * supports **lazy lock** with `std::defer_lock`, as well as `std::adopt_lock` for already locked mutexes
   * allows to pass mutex arround between functions and transfer ownership (it's **movable** but not copyable)
   * **tracks ownership** of `std::mutex`, if unlocked manually it won't unlock it again on destruction
-  * due to flexibility it provides, it's more expensive than `std::scoped_lock<>`
+* for better granulatity of lock there is `std::shared_mutex` since **C++17**
+  * it provides **2 levels of access**:
+    * **shared** - several threads can share ownership of the same mutex
+    * **exclusive** - only one thread can own the mutex
+  - if one thread has acquired the **exclusive lock**, no other threads can acquire any lock
+  - if one thread has acquired the **shared lock**, no other thread can acquire the **exclusive lock**
+  - `std::shared_mutex` is especially useful when shared data can be safely read by any number of threads simultaneously, but a thread may only write the same data when no other thread is reading or writing at the same time
+
+
+
+
+
+
+To provide mutual exclusion for somethings that happens only once (like **initialization**) 
+- there is `std::call_once()` with `std::once_flag` :
+```
+std::once_flag flag;
+std::call_once(flag, function...);
+```
+- or **scoped static initialization** which is **thread-safe** since **C++11**
+```
+{
+  static MyClass instance;
+}
+```
