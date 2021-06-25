@@ -51,6 +51,7 @@
   - if one thread has acquired the **exclusive lock**, no other threads can acquire any lock
   - if one thread has acquired the **shared lock**, no other thread can acquire the **exclusive lock**
   - `std::shared_mutex` is especially useful when shared data can be safely read by any number of threads simultaneously, but a thread may only write the same data when no other thread is reading or writing at the same time
+  - as **RAII wrapper** there is `std::shared_lock` which acquires lock on **shared** level
 
 
 
