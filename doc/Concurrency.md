@@ -3,8 +3,8 @@
 ## General
 * since **C++11** we got support for **threads** and **concurrency** built in language
   
+
 ## Threading
-### General
 * threading model in C++ is **1:1** threading model, which means: 
   * each C++ thread (`std:thread`) corresponds to single OS thread
   * those threads are managed directly by OS scheduler
@@ -29,7 +29,8 @@
   * `.get_id()` member function per given thread object
   * static function `std::this_thread::get_id()` from *inside* the thread
 
-#### Mutual exclusions
+## Mutual exclusions
+Mutual exclusions ensures that only one **thread** can access section of code at a time.
 * aquiring **mutex** is expensive operation, use it wisely for minimal amount of code
 * `std::mutex `class with member functions:
   * `.lock()` - locks the mutex, blocks if the mutex is not available
@@ -54,10 +55,6 @@
   - as **RAII wrapper** there is `std::shared_lock` which acquires lock on **shared** level
 
 
-
-
-
-
 To provide mutual exclusion for somethings that happens only once (like **initialization**) 
 - there is `std::call_once()` with `std::once_flag` :
 ```
@@ -70,3 +67,43 @@ std::call_once(flag, function...);
   static MyClass instance;
 }
 ```
+
+## Synchronization 
+`std::condition_variable` can be used to block some threads until another thread modifies a **shared variable** (condition) and notifies `std::condition_variable`
+
+The **thread** that modifies shared variable should:
+1. acquire `std::mutex` (typically via `std::scoped_lock`)
+2. perform work and modification under the **lock**
+3. execute `notify_one` or `notify_all` on the `std::condition_variable` (**lock** here is not required) 
+
+Any **thread** that wait on **condition variable** should:
+1. acquire a `std::unique_lock<>`, on the same **mutex** that protects the **shared variable**
+2. wait for condition to be satisfied by calling one of `wait/wait_for/wait_until`
+   - **waiting** releases lock until getting **notified**
+   - always use overloads with take **predicate**, otherwise you need to explicitly check for **condition** before waiting and handle **spurious wakeup** manually
+
+```
+std::condition_variable cv; 
+bool ready{false};
+std::mutex mutex;
+
+void producerThread()
+{
+    {
+      std::scoped_lock lock(mutex);
+      //do some work
+      ready = true;
+    }
+    cv.notify_one();
+}
+
+void consumerThread()
+{ 
+    std::unique_lock lock(mutex);
+    cv.wait(lock, []{return ready;}); //this releases mutex and suspends thread
+    //consume
+}
+```
+
+
+- `std::condition_variable` works only with `std::unique_lock<std::mutex>`; this restriction allows for maximal efficiency on some platforms. `std::condition_variable_any` provides a condition variable that works with any **BasicLockable** object, such as `std::shared_lock`
