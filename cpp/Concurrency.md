@@ -1,5 +1,5 @@
 # Threading and Concurrency
-[back to index](../README.md)
+[back to index](./INDEX.md)
 ## General
 * since **C++11** we got support for **threads** and **concurrency** built in language
   

@@ -1,5 +1,5 @@
 # Objects
-[back to index](../README.md)
+[back to index](./INDEX.md)
 
 **Object** in C++ has:
 - lifetime
@@ -19,7 +19,7 @@
 - the storage (with proper alignment and size) is obtained
 - its initialization (if needed) is completed
 
-[woth some minor exceptions regarding union members and arrays objects](https://en.cppreference.com/w/cpp/language/lifetime)
+[woth some minor exceptions regarding union members and arrays objects](https://en.cppreference.com/w/language/lifetime)
 ### **Lifetime** ends when:
 - **destructor** call start for *class type* objects
 - or **storage** of object is releases/reused

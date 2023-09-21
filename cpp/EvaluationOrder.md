@@ -1,5 +1,5 @@
 # Order of Evaluation
-[back to index](../README.md)
+[back to index](./INDEX.md)
 
 ## Evaluation of Expressions
 Evaluation of each **expression** includes:
@@ -21,7 +21,7 @@ If A is not sequenced before B and B is not sequenced before A, then two possibi
 - evaluations of A and B are **indeterminately sequenced**: they may be performed in any order but may not overlap: either A will be complete before B, or B will be complete before A. The order may be the opposite the next time the same expression is evaluated.
 
 ## Rules
-For rules about how expressions are **sequenced** look [HERE](https://en.cppreference.com/w/cpp/language/eval_order#Rules)
+For rules about how expressions are **sequenced** look [HERE](https://en.cppreference.com/w/language/eval_order#Rules)
 
 ## Undefined Behavior
 - if a side effect on a scalar object is unsequenced relative to another side effect on the same scalar object

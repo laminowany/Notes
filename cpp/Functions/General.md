@@ -1,6 +1,6 @@
 # General
 
-[back to index](../../README.md)
+[back to index](.././INDEX.md)
 
 ## Misc
 

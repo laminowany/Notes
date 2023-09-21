@@ -1,5 +1,5 @@
 # Value Categories
-[back to index](../README.md)
+[back to index](./INDEX.md)
 
 ## General
 - each **expression** is characterized by two independent properties: a **type** and a **value category**
@@ -7,9 +7,9 @@
 - there are also mixed categories which aggregate the primary ones:
   - **lvalues** and **xvalues** compromise **glvalues** (Generalized Lvalue)
   - **xvalues** and **prvalues** compromise **rvalues**
-    ![value categories](../res/valueCategories.jpg)
+    ![value categories](./res/valueCategories.jpg)
 
-## For detailed information about categories check [cpp reference](https://en.cppreference.com/w/cpp/language/value_category)
+## For detailed information about categories check [cpp reference](https://en.cppreference.com/w/language/value_category)
 
 ## Basic Categories
 ### lvalues

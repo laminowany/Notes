@@ -1,5 +1,5 @@
 # Optimization and Performance
-[back to index](../README.md)
+[back to index](./INDEX.md)
 
 ## General
 - compilers are free to optimize the code by doing whatever they want, as long as the *observable side effects* are not changed, with two exceptions:

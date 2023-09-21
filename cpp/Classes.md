@@ -1,5 +1,5 @@
 # Classes
-[back to index](../README.md)
+[back to index](./INDEX.md)
 
 ## General
 - **classes** and **structs** are basically the same in C++, the only difference is the default access modifier:
