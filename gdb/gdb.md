@@ -9,6 +9,12 @@
 - `l/list` - list source file
 - `<Ctrl + P/N>` - previous/next command
 
+## Frames
+- `bt/backtrace` - show frames
+- `frame #N` - switch to frame **#N**
+- `up` - go frame up
+- `down` - go frame down
+
 ## TUI (Text User Interface)
 - `<Ctrl + X, A>` to enter/exit TUI, or:
   - `tui enable`
