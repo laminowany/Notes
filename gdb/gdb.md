@@ -35,3 +35,4 @@
 - `info r` - registers
 - `info threads`
   - `thread #N` - switch to thread nr **#N**
+- `info sharedlibrary` - show loaded dlls
